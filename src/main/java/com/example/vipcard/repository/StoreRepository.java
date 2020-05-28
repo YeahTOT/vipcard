@@ -11,4 +11,5 @@ public interface StoreRepository extends CrudRepository<Store, Integer> {
 
     @Query("select * from store where storeOpenId = :openid")
     Collection<Store> findByStoreOpenid(@Param("openid") String openid);
+
 }

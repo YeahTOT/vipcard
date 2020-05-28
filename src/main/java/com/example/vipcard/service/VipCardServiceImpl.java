@@ -45,4 +45,9 @@ public class VipCardServiceImpl implements VipCardService {
         return storeRepository.findByStoreOpenid(openid);
     }
 
+    @Override
+    public Store addStore(Store store) {
+        return storeRepository.save(store);
+    }
+
 }

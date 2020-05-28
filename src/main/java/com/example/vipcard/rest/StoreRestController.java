@@ -3,12 +3,11 @@ package com.example.vipcard.rest;
 import com.example.vipcard.model.Store;
 import com.example.vipcard.service.VipCardService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
@@ -34,5 +33,13 @@ public class StoreRestController {
         Collection<Store> stores;
         stores = vipCardService.getStoresByOpenId(openid);
         return new ResponseEntity<>(stores, HttpStatus.OK);
+    }
+
+    // 增加store，用于初次登录
+    @RequestMapping(value="/",method = RequestMethod.POST,produces="application/json")
+    public ResponseEntity<Store> addStore(@RequestBody Store store, BindingResult result){
+        System.out.println(store);
+        store = vipCardService.addStore(store);
+        return new ResponseEntity<>(store, HttpStatus.CREATED);
     }
 }

@@ -11,4 +11,5 @@ public interface VipCardService {
     public Collection<StoreType> getAllStoreTypes();
     public Collection<Store> getAllStores();
     public Collection<Store> getStoresByOpenId(String openid);
+    public Store addStore(Store store);
 }

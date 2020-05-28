@@ -93,4 +93,18 @@ public class Store {
     public void setStoreName(String storeName) {
         this.storeName = storeName;
     }
+
+    @Override
+    public String toString() {
+        return "Store{" +
+                "storeOpenid='" + storeOpenid + '\'' +
+                ", storeUserName='" + storeUserName + '\'' +
+                ", storeLogo='" + storeLogo + '\'' +
+                ", storeAddress='" + storeAddress + '\'' +
+                ", storePhone='" + storePhone + '\'' +
+                ", storeNode='" + storeNode + '\'' +
+                ", storeName='" + storeName + '\'' +
+                ", storeType='" + storeType + '\'' +
+                '}';
+    }
 }
