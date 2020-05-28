@@ -1,4 +1,4 @@
-package com.example.vipcard.Bean;
+package com.example.vipcard.model;
 
 public class UserCard extends StoreCard{
     // 会员卡id

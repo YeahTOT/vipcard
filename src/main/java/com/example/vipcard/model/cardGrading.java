@@ -1,4 +1,4 @@
-package com.example.vipcard.Bean;
+package com.example.vipcard.model;
 
 // 会员卡等级规则
 public class cardGrading {

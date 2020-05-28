@@ -1,4 +1,4 @@
-package com.example.vipcard.Bean;
+package com.example.vipcard.model;
 
 // 排队进度表
 public class ranking {

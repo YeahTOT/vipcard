@@ -1,4 +1,4 @@
-package com.example.vipcard.Bean;
+package com.example.vipcard.model;
 
 import java.util.Date;
 

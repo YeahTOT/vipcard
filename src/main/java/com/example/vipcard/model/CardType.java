@@ -1,4 +1,6 @@
-package com.example.vipcard.Bean;
+package com.example.vipcard.model;
+
+import org.springframework.data.relational.core.mapping.Table;
 
 // 会员卡类型
 public class CardType {

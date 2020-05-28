@@ -1,20 +1,42 @@
-package com.example.vipcard.Bean;
+package com.example.vipcard.model;
 
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
+
+@Table("store")
 public class Store {
     // openid
+    @Column("storeOpenid")
     private String storeOpenid;
     // 商家姓名
+    @Column("storeUserName")
     private String storeUserName;
     // 商家logo
+    @Column("storeLogo")
     private String storeLogo;
     // 商家地址
+    @Column("storeAddress")
     private String storeAddress;
     // 商家电话
+    @Column("storePhone")
     private String storePhone;
     // 商家介绍
+    @Column("storeNode")
     private String storeNode;
     // 商家姓名
+    @Column("storeName")
     private String storeName;
+    // 商家类型
+    @Column("storeType")
+    private String storeType;
+
+    public String getStoreType() {
+        return storeType;
+    }
+
+    public void setStoreType(String storeType) {
+        this.storeType = storeType;
+    }
 
     public String getStoreOpenid() {
         return storeOpenid;
