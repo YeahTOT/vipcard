@@ -1,8 +1,10 @@
 package com.example.vipcard.service;
 
 import com.example.vipcard.model.Store;
+import com.example.vipcard.model.StoreCard;
 import com.example.vipcard.model.StoreType;
 import com.example.vipcard.model.User;
+import com.example.vipcard.repository.StoreCardRepository;
 import com.example.vipcard.repository.StoreRepository;
 import com.example.vipcard.repository.StoreTypeRepository;
 import com.example.vipcard.repository.UserRepository;
@@ -18,11 +20,14 @@ public class VipCardServiceImpl implements VipCardService {
     private UserRepository userRepository;
     private StoreTypeRepository storeTypeRepository;
     private StoreRepository storeRepository;
+    private StoreCardRepository storeCardRepository;
 
-    public VipCardServiceImpl(UserRepository userRepository, StoreTypeRepository storeTypeRepository, StoreRepository storeRepository) {
+    @Autowired
+    public VipCardServiceImpl(UserRepository userRepository, StoreTypeRepository storeTypeRepository, StoreRepository storeRepository, StoreCardRepository storeCardRepository) {
         this.userRepository = userRepository;
         this.storeTypeRepository = storeTypeRepository;
         this.storeRepository = storeRepository;
+        this.storeCardRepository = storeCardRepository;
     }
 
     @Override
@@ -49,5 +54,16 @@ public class VipCardServiceImpl implements VipCardService {
     public Store addStore(Store store) {
         return storeRepository.save(store);
     }
+
+    @Override
+    public Collection<StoreCard> getAllStoreCards() {
+        return (Collection<StoreCard>) storeCardRepository.findAll();
+    }
+
+    @Override
+    public Collection<StoreCard> getStoreCardByOpenId(String openid) {
+        return storeCardRepository.findStoreCardByOpenId(openid);
+    }
+
 
 }

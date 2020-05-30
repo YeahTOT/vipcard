@@ -1,11 +1,13 @@
 package com.example.vipcard.model;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 @Table("store")
 public class Store {
     // openid
+    @Id
     @Column("storeOpenid")
     private String storeOpenid;
     // 商家姓名

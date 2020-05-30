@@ -1,31 +1,13 @@
 package com.example.vipcard.model;
 
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 // 会员卡类型
+@Table("cardtype")
 public class CardType {
-    // 会员卡类型id
-    private int cardTypeId;
-    // 顾客会员卡id
-    private int userCardId;
-    // 类型
+    @Column("cardType")
     private String cardType;
-
-    public int getCardTypeId() {
-        return cardTypeId;
-    }
-
-    public void setCardTypeId(int cardTypeId) {
-        this.cardTypeId = cardTypeId;
-    }
-
-    public int getUserCardId() {
-        return userCardId;
-    }
-
-    public void setUserCardId(int userCardId) {
-        this.userCardId = userCardId;
-    }
 
     public String getCardType() {
         return cardType;

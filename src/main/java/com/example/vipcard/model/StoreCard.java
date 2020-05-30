@@ -1,26 +1,49 @@
 package com.example.vipcard.model;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.MappedCollection;
+import org.springframework.data.relational.core.mapping.Table;
+
+import java.util.Collection;
+
+// 商家创建的会员卡
+@Table("storecard")
 public class StoreCard {
     // 会员卡id
+    @Id
+    @Column("storeCardId")
     private int storeCardId;
     // 商家id
+    @Column("storeOpenid")
     private String storeOpenid;
     // 会员卡名称
+    @Column("cardName")
     private String cardName;
     // 会员卡类型
-    private String cardType;
+    @MappedCollection(idColumn = "storeCardId",keyColumn="cardType")
+    private Collection<CardType> cardTypes;
     // 会员卡开始时间
+    @Column("cardTimeStart")
     private String cardTimeStart;
     // 会员卡截至时间
+    @Column("cardTimeEnd")
     private String cardTimeEnd;
     // 会员卡状态
+    @Column("cardStatus")
     private String cardStatus;
     // 会会员卡备注
+    @Column("cardNode")
     private String cardNode;
     // 会员卡剩余数量
-    private int surplus;
+    @Column("cardSurplus")
+    private int cardSurplus;
     // 会员卡发卡总数
-    private int num;
+    @Column("cardNum")
+    private int cardNum;
+    // 会员卡logo
+    @Column("cardLogo")
+    private String cardLogo;
 
     public int getStoreCardId() {
         return storeCardId;
@@ -29,24 +52,6 @@ public class StoreCard {
     public void setStoreCardId(int storeCardId) {
         this.storeCardId = storeCardId;
     }
-
-    public int getSurplus() {
-        return surplus;
-    }
-
-    public void setSurplus(int surplus) {
-        this.surplus = surplus;
-    }
-
-    public int getNum() {
-        return num;
-    }
-
-    public void setNum(int num) {
-        this.num = num;
-    }
-
-
 
     public String getStoreOpenid() {
         return storeOpenid;
@@ -62,14 +67,6 @@ public class StoreCard {
 
     public void setCardName(String cardName) {
         this.cardName = cardName;
-    }
-
-    public String getCardType() {
-        return cardType;
-    }
-
-    public void setCardType(String cardType) {
-        this.cardType = cardType;
     }
 
     public String getCardTimeStart() {
@@ -102,5 +99,37 @@ public class StoreCard {
 
     public void setCardNode(String cardNode) {
         this.cardNode = cardNode;
+    }
+
+    public int getCardSurplus() {
+        return cardSurplus;
+    }
+
+    public void setCardSurplus(int cardSurplus) {
+        this.cardSurplus = cardSurplus;
+    }
+
+    public int getCardNum() {
+        return cardNum;
+    }
+
+    public void setCardNum(int cardNum) {
+        this.cardNum = cardNum;
+    }
+
+    public String getCardLogo() {
+        return cardLogo;
+    }
+
+    public void setCardLogo(String cardLogo) {
+        this.cardLogo = cardLogo;
+    }
+
+    public Collection<CardType> getCardTypes() {
+        return cardTypes;
+    }
+
+    public void setCardTypes(Collection<CardType> cardTypes) {
+        this.cardTypes = cardTypes;
     }
 }

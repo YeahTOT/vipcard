@@ -1,7 +1,7 @@
 package com.example.vipcard.model;
 
 // 排队进度表
-public class ranking {
+public class Ranking {
     // 排队进度id
     private int rankingId;
     // userOpenid
