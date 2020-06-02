@@ -1,12 +1,19 @@
 package com.example.vipcard.model;
 
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 // 会员卡类型
-@Table("cardtype")
+@Entity
+@Table(name = "cardtype")
 public class CardType {
-    @Column("cardType")
+    @Id
+    @Column(name = "cardTypeId")
+    private int cardTypeId;
+
+    @Column(name = "cardType")
     private String cardType;
 
     public String getCardType() {

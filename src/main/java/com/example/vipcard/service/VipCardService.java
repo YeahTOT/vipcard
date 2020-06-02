@@ -1,9 +1,6 @@
 package com.example.vipcard.service;
 
-import com.example.vipcard.model.Store;
-import com.example.vipcard.model.StoreCard;
-import com.example.vipcard.model.StoreType;
-import com.example.vipcard.model.User;
+import com.example.vipcard.model.*;
 
 import java.util.Collection;
 
@@ -22,5 +19,11 @@ public interface VipCardService {
     public Collection<StoreCard> getAllStoreCards();
     // 根据商家的openid获取会员卡信息
     public Collection<StoreCard> getStoreCardByOpenId(String openid);
+    // 获取所有的用户会员卡
+    public Collection<UserCard> getAllUserCards();
+    // 根据openid查找该用户的会员卡
+    public Collection<UserCard> getUserCardByOpenid(String openid);
+    // 根据userCardId查询某一张会员卡
+    public UserCard getUserCardByUserCardId(int userCardId);
 
 }

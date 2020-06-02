@@ -1,13 +1,7 @@
 package com.example.vipcard.service;
 
-import com.example.vipcard.model.Store;
-import com.example.vipcard.model.StoreCard;
-import com.example.vipcard.model.StoreType;
-import com.example.vipcard.model.User;
-import com.example.vipcard.repository.StoreCardRepository;
-import com.example.vipcard.repository.StoreRepository;
-import com.example.vipcard.repository.StoreTypeRepository;
-import com.example.vipcard.repository.UserRepository;
+import com.example.vipcard.model.*;
+import com.example.vipcard.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,13 +15,15 @@ public class VipCardServiceImpl implements VipCardService {
     private StoreTypeRepository storeTypeRepository;
     private StoreRepository storeRepository;
     private StoreCardRepository storeCardRepository;
+    private UserCardRepository userCardRepository;
 
     @Autowired
-    public VipCardServiceImpl(UserRepository userRepository, StoreTypeRepository storeTypeRepository, StoreRepository storeRepository, StoreCardRepository storeCardRepository) {
+    public VipCardServiceImpl(UserRepository userRepository, StoreTypeRepository storeTypeRepository, StoreRepository storeRepository, StoreCardRepository storeCardRepository, UserCardRepository userCardRepository) {
         this.userRepository = userRepository;
         this.storeTypeRepository = storeTypeRepository;
         this.storeRepository = storeRepository;
         this.storeCardRepository = storeCardRepository;
+        this.userCardRepository = userCardRepository;
     }
 
     @Override
@@ -63,6 +59,21 @@ public class VipCardServiceImpl implements VipCardService {
     @Override
     public Collection<StoreCard> getStoreCardByOpenId(String openid) {
         return storeCardRepository.findStoreCardByOpenId(openid);
+    }
+
+    @Override
+    public Collection<UserCard> getAllUserCards() {
+        return (Collection<UserCard>)userCardRepository.findAll();
+    }
+
+    @Override
+    public Collection<UserCard> getUserCardByOpenid(String openid) {
+        return userCardRepository.findUserCardsByOpenId(openid);
+    }
+
+    @Override
+    public UserCard getUserCardByUserCardId(int userCardId) {
+        return userCardRepository.findUserCardByUserCardId(userCardId);
     }
 
 

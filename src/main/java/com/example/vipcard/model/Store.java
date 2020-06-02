@@ -1,36 +1,40 @@
 package com.example.vipcard.model;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
 
-@Table("store")
+import javax.persistence.*;
+import java.util.Collection;
+
+@Entity
+@Table(name = "store")
 public class Store {
     // openid
     @Id
-    @Column("storeOpenid")
+    @Column(name = "storeOpenid")
     private String storeOpenid;
     // 商家姓名
-    @Column("storeUserName")
+    @Column(name = "storeUserName")
     private String storeUserName;
     // 商家logo
-    @Column("storeLogo")
+    @Column(name = "storeLogo")
     private String storeLogo;
     // 商家地址
-    @Column("storeAddress")
+    @Column(name = "storeAddress")
     private String storeAddress;
     // 商家电话
-    @Column("storePhone")
+    @Column(name = "storePhone")
     private String storePhone;
     // 商家介绍
-    @Column("storeNode")
+    @Column(name = "storeNode")
     private String storeNode;
     // 商家姓名
-    @Column("storeName")
+    @Column(name = "storeName")
     private String storeName;
     // 商家类型
-    @Column("storeType")
+    @Column(name = "storeType")
     private String storeType;
+
+//    @OneToMany(mappedBy = "store",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+//    private Collection<StoreCard> storeCards;//文章列表
 
     public String getStoreType() {
         return storeType;

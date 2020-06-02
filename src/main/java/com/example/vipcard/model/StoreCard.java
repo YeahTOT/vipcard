@@ -1,49 +1,65 @@
 package com.example.vipcard.model;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.MappedCollection;
-import org.springframework.data.relational.core.mapping.Table;
+import javax.persistence.*;
 
 import java.util.Collection;
 
 // 商家创建的会员卡
-@Table("storecard")
+@Entity
+@Table(name = "storecard")
 public class StoreCard {
     // 会员卡id
     @Id
-    @Column("storeCardId")
+    @Column(name = "storeCardId")
     private int storeCardId;
     // 商家id
-    @Column("storeOpenid")
-    private String storeOpenid;
+//    @Column(name = "storeOpenid")
+//    private String storeOpenid;
     // 会员卡名称
-    @Column("cardName")
+    @Column(name = "cardName")
     private String cardName;
     // 会员卡类型
-    @MappedCollection(idColumn = "storeCardId",keyColumn="cardType")
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "storecard_cardtype", joinColumns = @JoinColumn(name = "storeCardId"),
+            inverseJoinColumns = @JoinColumn(name = "cardTypeId"))
     private Collection<CardType> cardTypes;
     // 会员卡开始时间
-    @Column("cardTimeStart")
+    @Column(name = "cardTimeStart")
     private String cardTimeStart;
     // 会员卡截至时间
-    @Column("cardTimeEnd")
+    @Column(name = "cardTimeEnd")
     private String cardTimeEnd;
     // 会员卡状态
-    @Column("cardStatus")
+    @Column(name = "cardStatus")
     private String cardStatus;
     // 会会员卡备注
-    @Column("cardNode")
+    @Column(name = "cardNode")
     private String cardNode;
     // 会员卡剩余数量
-    @Column("cardSurplus")
+    @Column(name = "cardSurplus")
     private int cardSurplus;
     // 会员卡发卡总数
-    @Column("cardNum")
+    @Column(name = "cardNum")
     private int cardNum;
     // 会员卡logo
-    @Column("cardLogo")
+    @Column(name = "cardLogo")
     private String cardLogo;
+
+//    // 对应的商家
+    @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH},optional=false)//可选属性optional=false,表示author不能为空。删除文章，不影响用户
+    @JoinColumn(name = "storeOpenid")//设置在article表中的关联字段(外键)
+    private Store store;
+
+//    @OneToMany(mappedBy = "sCard",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+//    private Collection<UserCard> userCards;//文章列表
+
+    public Store getStore() {
+        return store;
+    }
+
+    public void setStore(Store store) {
+        this.store = store;
+    }
 
     public int getStoreCardId() {
         return storeCardId;
@@ -51,14 +67,6 @@ public class StoreCard {
 
     public void setStoreCardId(int storeCardId) {
         this.storeCardId = storeCardId;
-    }
-
-    public String getStoreOpenid() {
-        return storeOpenid;
-    }
-
-    public void setStoreOpenid(String storeOpenid) {
-        this.storeOpenid = storeOpenid;
     }
 
     public String getCardName() {

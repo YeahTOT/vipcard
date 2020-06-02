@@ -27,7 +27,6 @@ public class StoreRestController {
     }
 
     // 根据openid查找store
-    // 查找所有店家
     @RequestMapping(value="/{openid}",method = RequestMethod.GET,produces="application/json")
     public ResponseEntity<Collection<Store>> getAllStoreTypes(@PathVariable String openid){
         Collection<Store> stores;

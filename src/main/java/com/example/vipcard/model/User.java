@@ -1,20 +1,24 @@
 package com.example.vipcard.model;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
 
-@Table("user")
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "user")
 public class User {
     // openid
     @Id
-    @Column("userOpenid")
+    @Column(name ="userOpenid")
     private String userOpenid;
     // 头像路径
-    @Column("avatarUrl")
+    @Column(name ="avatarUrl")
     private String avatarUrl;
     // 用户名称
-    @Column("userName")
+    @Column(name ="userName")
     private String userName;
 
     public String getUserOpenid() {
