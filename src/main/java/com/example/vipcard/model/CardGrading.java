@@ -1,7 +1,7 @@
 package com.example.vipcard.model;
 
 // 会员卡等级规则
-public class cardGrading {
+public class CardGrading {
     // 主键
     private String id;
     // 商家会员卡id

@@ -1,17 +1,37 @@
 package com.example.vipcard.model;
 
+import javax.persistence.*;
+import java.util.Date;
+
 // 排队进度表
+@Entity
+@Table(name="ranking")
 public class Ranking {
     // 排队进度id
+    @Id
     private int rankingId;
     // userOpenid
-    private String userOpenid;
+    @ManyToOne(optional=false)//
+    @JoinColumn(name = "userOpenid")//
+    private User user;
     // storeOpenid
-    private String storeOpenid;
-    // 排队总人数
-    private int allNum;
-    //当前排队人数
-    private int nowNum;
+    @ManyToOne(optional=false)//
+    @JoinColumn(name = "storeOpenid")//
+    private Store store;
+    // 开始排队的时间
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date rankingTime;
+
+    public Ranking() {
+    }
+
+    public Date getRankingTime() {
+        return rankingTime;
+    }
+
+    public void setRankingTime(Date rankingTime) {
+        this.rankingTime = rankingTime;
+    }
 
     public int getRankingId() {
         return rankingId;
@@ -21,35 +41,28 @@ public class Ranking {
         this.rankingId = rankingId;
     }
 
-    public String getUserOpenid() {
-        return userOpenid;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserOpenid(String userOpenid) {
-        this.userOpenid = userOpenid;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public String getStoreOpenid() {
-        return storeOpenid;
+    public Store getStore() {
+        return store;
     }
 
-    public void setStoreOpenid(String storeOpenid) {
-        this.storeOpenid = storeOpenid;
+    public void setStore(Store store) {
+        this.store = store;
     }
 
-    public int getAllNum() {
-        return allNum;
-    }
-
-    public void setAllNum(int allNum) {
-        this.allNum = allNum;
-    }
-
-    public int getNowNum() {
-        return nowNum;
-    }
-
-    public void setNowNum(int nowNum) {
-        this.nowNum = nowNum;
+    @Override
+    public String toString() {
+        return "Ranking{" +
+                "user=" + user +
+                ", store=" + store +
+                ", rankingTime=" + rankingTime +
+                '}';
     }
 }

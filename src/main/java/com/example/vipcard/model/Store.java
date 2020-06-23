@@ -10,6 +10,7 @@ public class Store {
     // openid
     @Id
     @Column(name = "storeOpenid")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String storeOpenid;
     // 商家姓名
     @Column(name = "storeUserName")
@@ -33,8 +34,8 @@ public class Store {
     @Column(name = "storeType")
     private String storeType;
 
-//    @OneToMany(mappedBy = "store",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-//    private Collection<StoreCard> storeCards;//文章列表
+    @OneToMany(mappedBy = "store",cascade = CascadeType.ALL)
+    private Collection<StoreCard> storeCards;//文章列表
 
     public String getStoreType() {
         return storeType;
@@ -43,6 +44,7 @@ public class Store {
     public void setStoreType(String storeType) {
         this.storeType = storeType;
     }
+
 
     public String getStoreOpenid() {
         return storeOpenid;

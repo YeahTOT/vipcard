@@ -2,10 +2,16 @@ package com.example.vipcard.service;
 
 import com.example.vipcard.model.*;
 import com.example.vipcard.repository.*;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class VipCardServiceImpl implements VipCardService {
@@ -16,14 +22,17 @@ public class VipCardServiceImpl implements VipCardService {
     private StoreRepository storeRepository;
     private StoreCardRepository storeCardRepository;
     private UserCardRepository userCardRepository;
+    private CardRecordRepository cardRecordRepository;
+    private RankingRepository rankingRepository;
 
-    @Autowired
-    public VipCardServiceImpl(UserRepository userRepository, StoreTypeRepository storeTypeRepository, StoreRepository storeRepository, StoreCardRepository storeCardRepository, UserCardRepository userCardRepository) {
+    public VipCardServiceImpl(UserRepository userRepository, StoreTypeRepository storeTypeRepository, StoreRepository storeRepository, StoreCardRepository storeCardRepository, UserCardRepository userCardRepository, CardRecordRepository cardRecordRepository, RankingRepository rankingRepository) {
         this.userRepository = userRepository;
         this.storeTypeRepository = storeTypeRepository;
         this.storeRepository = storeRepository;
         this.storeCardRepository = storeCardRepository;
         this.userCardRepository = userCardRepository;
+        this.cardRecordRepository = cardRecordRepository;
+        this.rankingRepository = rankingRepository;
     }
 
     @Override
@@ -37,18 +46,28 @@ public class VipCardServiceImpl implements VipCardService {
     }
 
     @Override
+    public StoreType addStoreType(StoreType storeType) {
+        return storeTypeRepository.save(storeType);
+    }
+
+    @Override
     public Collection<Store> getAllStores() {
         return (Collection<Store>) storeRepository.findAll();
     }
 
     @Override
-    public Collection<Store> getStoresByOpenId(String openid) {
+    public Store getStoresByOpenId(String openid) {
         return storeRepository.findByStoreOpenid(openid);
     }
 
     @Override
     public Store addStore(Store store) {
         return storeRepository.save(store);
+    }
+
+    @Override
+    public boolean updateStore(Store store) {
+        return storeRepository.updateByStoreOpenid(store) == 1;
     }
 
     @Override
@@ -62,6 +81,16 @@ public class VipCardServiceImpl implements VipCardService {
     }
 
     @Override
+    public StoreCard getStoreCardById(int storeCardId) {
+        return storeCardRepository.findStoreCardByStoreCardId(storeCardId);
+    }
+
+    @Override
+    public StoreCard addStoreCard(StoreCard storeCard) {
+        return storeCardRepository.save(storeCard);
+    }
+
+    @Override
     public Collection<UserCard> getAllUserCards() {
         return (Collection<UserCard>)userCardRepository.findAll();
     }
@@ -72,8 +101,60 @@ public class VipCardServiceImpl implements VipCardService {
     }
 
     @Override
+    public UserCard addUserCard(UserCard userCard) {
+        return userCardRepository.save(userCard);
+    }
+
+    @Override
     public UserCard getUserCardByUserCardId(int userCardId) {
         return userCardRepository.findUserCardByUserCardId(userCardId);
+    }
+
+    @Override
+    public Collection<CardRecord> getCardRecords() {
+        return (Collection<CardRecord>) cardRecordRepository.findAll();
+    }
+
+    @Override
+    public Collection<CardRecord> getCardRecordsByUserCardId(int userCardId) {
+        return cardRecordRepository.findCardRecordsByUserCardId(userCardId);
+    }
+
+    @Override
+    public Collection<CardRecord> getCardRecordsByUserCardIdANDDate(int userCardId, String dateStart, String dataEnd) {
+        return cardRecordRepository.findCardRecordsByUserCardIdAndData(userCardId,dateStart,dataEnd);
+    }
+
+    @Override
+    public Collection<Ranking> getAllRankings() {
+        return rankingRepository.findAll();
+    }
+
+    @Override
+    public Collection<Ranking> getAllRankingsByStoreOpenid(String storeOpenid) {
+        return rankingRepository.findAllByStoreOpenid(storeOpenid);
+    }
+
+    @Override
+    public Integer getRankingByUserOpenid(String userOpenid,String storeOpenid) {
+        Integer n = rankingRepository.findByUserOpenid(userOpenid,storeOpenid);
+        if (n == null){
+            return -1;
+        }
+        return n;
+    }
+
+    @Override
+    public int getRankingNumByStoreOpenid(String storeOpenid) {
+        return rankingRepository.findAllByStoreOpenid(storeOpenid).size();
+    }
+
+    @Override
+    public boolean userAddRanking(String userOpenid, String storeOpenid) {
+        Date date = new Date();
+        SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String str = f.format(date);
+        return rankingRepository.addRanking(userOpenid, storeOpenid,str)>0;
     }
 
 

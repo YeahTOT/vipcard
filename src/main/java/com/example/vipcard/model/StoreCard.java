@@ -11,15 +11,16 @@ public class StoreCard {
     // 会员卡id
     @Id
     @Column(name = "storeCardId")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int storeCardId;
     // 商家id
 //    @Column(name = "storeOpenid")
 //    private String storeOpenid;
-    // 会员卡名称
+//    // 会员卡名称
     @Column(name = "cardName")
     private String cardName;
     // 会员卡类型
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = {CascadeType.MERGE})
     @JoinTable(name = "storecard_cardtype", joinColumns = @JoinColumn(name = "storeCardId"),
             inverseJoinColumns = @JoinColumn(name = "cardTypeId"))
     private Collection<CardType> cardTypes;
@@ -45,13 +46,14 @@ public class StoreCard {
     @Column(name = "cardLogo")
     private String cardLogo;
 
-//    // 对应的商家
-    @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH},optional=false)//可选属性optional=false,表示author不能为空。删除文章，不影响用户
+//    // 对应的商家,增加时和删除时不修改
+    @ManyToOne(optional=false)//可选属性optional=false,表示author不能为空。删除文章，不影响用户
     @JoinColumn(name = "storeOpenid")//设置在article表中的关联字段(外键)
     private Store store;
 
-//    @OneToMany(mappedBy = "sCard",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-//    private Collection<UserCard> userCards;//文章列表
+    // 自己发放的会员卡
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "storeCard")
+    private Collection<UserCard> userCards;
 
     public Store getStore() {
         return store;
@@ -139,5 +141,23 @@ public class StoreCard {
 
     public void setCardTypes(Collection<CardType> cardTypes) {
         this.cardTypes = cardTypes;
+    }
+
+    @Override
+    public String toString() {
+        return "StoreCard{" +
+                "storeCardId=" + storeCardId +
+                ", cardName='" + cardName + '\'' +
+                ", cardTypes=" + cardTypes +
+                ", cardTimeStart='" + cardTimeStart + '\'' +
+                ", cardTimeEnd='" + cardTimeEnd + '\'' +
+                ", cardStatus='" + cardStatus + '\'' +
+                ", cardNode='" + cardNode + '\'' +
+                ", cardSurplus=" + cardSurplus +
+                ", cardNum=" + cardNum +
+                ", cardLogo='" + cardLogo + '\'' +
+                ", store=" + store +
+                ", userCards=" + userCards +
+                '}';
     }
 }

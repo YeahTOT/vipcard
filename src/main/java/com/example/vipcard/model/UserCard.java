@@ -2,17 +2,17 @@ package com.example.vipcard.model;
 
 import javax.persistence.*;
 
-
-import java.util.Collection;
-
 // 用户会员卡
 @Entity
-@Table(name = "usercardView")
+@Table(name = "usercard")
 public class UserCard {
     // 会员卡id
     @Id
-    @Column(name = "userCardId")
+    @Column(name = "userCardId",insertable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userCardId;
+//    @Column(name = "storeCardId")
+//    private int storeCardId;
     // 用户openid
     @Column(name = "userOpenid")
     private String userOpenid;
@@ -26,17 +26,16 @@ public class UserCard {
     @Column(name = "cardTimes")
     private int cardTimes;
 
-    @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH},optional=false)//可选属性optional=false,表示author不能为空。删除文章，不影响用户
+    @ManyToOne(optional=false)
     @JoinColumn(name="storeCardId")//设置在article表中的关联字段(外键)
-    private StoreCard sCard;
+    private StoreCard storeCard;
 
-
-    public StoreCard getsCard() {
-        return sCard;
+    public StoreCard getStoreCard() {
+        return storeCard;
     }
 
-    public void setsCard(StoreCard sCard) {
-        this.sCard = sCard;
+    public void setStoreCard(StoreCard storeCard) {
+        this.storeCard = storeCard;
     }
 
     public int getUserCardId() {
@@ -46,6 +45,13 @@ public class UserCard {
     public void setUserCardId(int userCardId) {
         this.userCardId = userCardId;
     }
+//    public int getUserCardId() {
+//        return userCardId;
+//    }
+//
+//    public void setUserCardId(int userCardId) {
+//        this.userCardId = userCardId;
+//    }
 
     public String getUserOpenid() {
         return userOpenid;
@@ -79,4 +85,15 @@ public class UserCard {
         this.cardTimes = cardTimes;
     }
 
+    @Override
+    public String toString() {
+        return "UserCard{" +
+                "userCardId=" + userCardId +
+                ", userOpenid='" + userOpenid + '\'' +
+                ", cardMoney=" + cardMoney +
+                ", cardScore=" + cardScore +
+                ", cardTimes=" + cardTimes +
+                ", storeCard=" + storeCard +
+                '}';
+    }
 }

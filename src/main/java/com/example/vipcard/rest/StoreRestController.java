@@ -28,8 +28,8 @@ public class StoreRestController {
 
     // 根据openid查找store
     @RequestMapping(value="/{openid}",method = RequestMethod.GET,produces="application/json")
-    public ResponseEntity<Collection<Store>> getAllStoreTypes(@PathVariable String openid){
-        Collection<Store> stores;
+    public ResponseEntity<Store> getAllStoreTypes(@PathVariable String openid){
+        Store stores;
         stores = vipCardService.getStoresByOpenId(openid);
         return new ResponseEntity<>(stores, HttpStatus.OK);
     }
@@ -37,8 +37,14 @@ public class StoreRestController {
     // 增加store，用于初次登录
     @RequestMapping(value="/",method = RequestMethod.POST,produces="application/json")
     public ResponseEntity<Store> addStore(@RequestBody Store store, BindingResult result){
-        System.out.println(store);
         store = vipCardService.addStore(store);
         return new ResponseEntity<>(store, HttpStatus.CREATED);
+    }
+
+    // 更新store
+    @RequestMapping(value="/",method = RequestMethod.PUT,produces="application/json")
+    public ResponseEntity<Boolean> updateStore(@RequestBody Store store, BindingResult result){
+        boolean key = vipCardService.updateStore(store);
+        return new ResponseEntity<>(key, HttpStatus.CREATED);
     }
 }

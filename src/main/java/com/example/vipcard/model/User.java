@@ -45,4 +45,12 @@ public class User {
         this.userName = userName;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "userOpenid='" + userOpenid + '\'' +
+                ", avatarUrl='" + avatarUrl + '\'' +
+                ", userName='" + userName + '\'' +
+                '}';
+    }
 }

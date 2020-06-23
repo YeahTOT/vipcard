@@ -14,6 +14,7 @@ public class StoreType {
     @Column("storeType")
     private String storeType;
 
+
     public int getStoreTypeId() {
         return storeTypeId;
     }
@@ -28,5 +29,13 @@ public class StoreType {
 
     public void setStoreType(String storeType) {
         this.storeType = storeType;
+    }
+
+    @Override
+    public String toString() {
+        return "StoreType{" +
+                "storeTypeId=" + storeTypeId +
+                ", storeType='" + storeType + '\'' +
+                '}';
     }
 }
