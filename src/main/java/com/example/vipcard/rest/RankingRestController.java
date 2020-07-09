@@ -1,19 +1,17 @@
 package com.example.vipcard.rest;
 
 import com.example.vipcard.model.Ranking;
+import com.example.vipcard.model.Store;
 import com.example.vipcard.service.VipCardService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.bind.BindResult;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
-import java.util.Scanner;
 
 @RestController
 @RequestMapping("/vipcard/ranking")
@@ -39,11 +37,17 @@ public class RankingRestController {
 
     // 用户获取当前排队进度
     @RequestMapping(value = "/rankingByUserOpenid/{userOpenid}/{storeOpenid}", method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity<Integer> findAllRankingsByUserOpenid(@PathVariable String userOpenid, @PathVariable String storeOpenid) {
-        Integer num = vipCardService.getRankingByUserOpenid(userOpenid, storeOpenid);
+    public ResponseEntity<Integer> findAllRankingsByUserOpenidAndStoreOpenid(@PathVariable String userOpenid, @PathVariable String storeOpenid) {
+        Integer num = vipCardService.getRankingByUserOpenidAndStoreOpenid(userOpenid, storeOpenid);
         return new ResponseEntity<>(num, HttpStatus.OK);
     }
 
+//     用户获取当前排队进度
+    @RequestMapping(value = "/rankingByUserOpenid/{userOpenid}", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<Integer> findAllRankingsByUserOpenid(@PathVariable String userOpenid) {
+        Integer num = vipCardService.getRankingByUserOpenid(userOpenid);
+        return new ResponseEntity<>(num, HttpStatus.OK);
+    }
     // 商家获取当前排队记录
     @RequestMapping(value = "/rankingByStoreOpenid/{storeOpenid}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<Collection<Ranking>> findAllRankingsByStoreOpenid(@PathVariable String storeOpenid) {
@@ -60,7 +64,7 @@ public class RankingRestController {
         // 查询当前store的排队进度
         // 判断这个用户是否已经排队
         boolean key = false;
-        Integer n = vipCardService.getRankingByUserOpenid(userOpenid, storeOpenid);
+        Integer n = vipCardService.getRankingByUserOpenidAndStoreOpenid(userOpenid, storeOpenid);
         if (n == -1) {
             key = vipCardService.userAddRanking(userOpenid, storeOpenid);
         }
@@ -77,6 +81,13 @@ public class RankingRestController {
             rankings = vipCardService.getAllRankingsByStoreOpenid(storeOpenid);
         }
         return new ResponseEntity<>(rankings, HttpStatus.OK);
+    }
+
+    // 根据用户查询正在排队的商家信息
+    @RequestMapping(value = "/rankingFindStoreByUser/{userOpenid}",method = RequestMethod.GET)
+    public ResponseEntity<Collection<Store>> rankingFindStoreByUser(@PathVariable String userOpenid){
+        Collection<Store> stores = vipCardService.findStoreByUser(userOpenid);
+        return new ResponseEntity<>(stores, HttpStatus.OK);
     }
 
     // 商家取消排队

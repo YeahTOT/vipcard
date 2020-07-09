@@ -2,14 +2,10 @@ package com.example.vipcard.service;
 
 import com.example.vipcard.model.*;
 import com.example.vipcard.repository.*;
-import io.swagger.models.auth.In;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -92,7 +88,7 @@ public class VipCardServiceImpl implements VipCardService {
 
     @Override
     public Collection<UserCard> getAllUserCards() {
-        return (Collection<UserCard>)userCardRepository.findAll();
+        return (Collection<UserCard>) userCardRepository.findAll();
     }
 
     @Override
@@ -127,7 +123,7 @@ public class VipCardServiceImpl implements VipCardService {
 
     @Override
     public Collection<CardRecord> getCardRecordsByUserCardIdANDDate(int userCardId, String dateStart, String dataEnd) {
-        return cardRecordRepository.findCardRecordsByUserCardIdAndData(userCardId,dateStart,dataEnd);
+        return cardRecordRepository.findCardRecordsByUserCardIdAndData(userCardId, dateStart, dataEnd);
     }
 
     @Override
@@ -141,9 +137,9 @@ public class VipCardServiceImpl implements VipCardService {
     }
 
     @Override
-    public Integer getRankingByUserOpenid(String userOpenid,String storeOpenid) {
-        Integer n = rankingRepository.findByUserOpenid(userOpenid,storeOpenid);
-        if (n == null){
+    public Integer getRankingByUserOpenidAndStoreOpenid(String userOpenid, String storeOpenid) {
+        Integer n = rankingRepository.findByUserOpenidAndStoreOpenid(userOpenid, storeOpenid);
+        if (n == null) {
             return -1;
         }
         return n;
@@ -159,12 +155,24 @@ public class VipCardServiceImpl implements VipCardService {
         Date date = new Date();
         SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String str = f.format(date);
-        return rankingRepository.addRanking(userOpenid, storeOpenid,str)>0;
+        return rankingRepository.addRanking(userOpenid, storeOpenid, str) > 0;
     }
 
     @Override
     public Integer storeDelUserRanking(String storeOpenid) {
         return rankingRepository.deleteByStore(storeOpenid);
+    }
+
+    @Override
+    public Integer getRankingByUserOpenid(String userOpenid) {
+        return rankingRepository.findByUserOpenid(userOpenid);
+    }
+
+    @Override
+    public Collection<Store> findStoreByUser(String userOpenid) {
+        Store store = null;
+        Collection<Store> stores = storeRepository.findStoreOpenidByUser(userOpenid);
+        return stores;
     }
 
 

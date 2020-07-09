@@ -30,5 +30,8 @@ public interface StoreRepository extends JpaRepository<Store, Integer> {
             "where s.storeOpenid = :#{#store.storeOpenid}")
     int updateByStoreOpenid(@Param("store") Store store);
 
+    @Query("select ranking.store from Ranking ranking where ranking.user.userOpenid = :userOpenid")
+    Collection<Store> findStoreOpenidByUser(String userOpenid);
+
 
 }

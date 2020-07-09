@@ -7,7 +7,8 @@ java -jar vipcard-0.0.1-SNAPSHOT.jar
 
 
 # 进度
-商家叫号
+用户申请排队，查看排队的api实现
+用户取消预约待实现
 登录，讲登录信息保存在session中
 
    {

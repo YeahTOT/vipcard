@@ -59,11 +59,15 @@ public interface VipCardService {
     // 商家查询自己店铺的所有排队记录
     public Collection<Ranking> getAllRankingsByStoreOpenid(String storeOpenid);
     // 用户查询自己的排队进度
-    public Integer getRankingByUserOpenid(String userOpenid,String storeOpenid);
+    public Integer getRankingByUserOpenidAndStoreOpenid(String userOpenid, String storeOpenid);
     // 获取store排队总人数
     public int getRankingNumByStoreOpenid(String storeOpenid);
     // 用户申请排队
     public boolean userAddRanking(String userOpenid,String storeOpenid);
     // 商家叫号 删除排名第一的人的ranking
     public Integer storeDelUserRanking(String storeOpenid);
+
+    Integer getRankingByUserOpenid(String userOpenid);
+
+    Collection<Store> findStoreByUser(String userOpenid);
 }

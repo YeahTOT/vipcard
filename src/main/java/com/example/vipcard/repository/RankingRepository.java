@@ -1,6 +1,7 @@
 package com.example.vipcard.repository;
 
 import com.example.vipcard.model.Ranking;
+import com.example.vipcard.model.Store;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -19,7 +20,7 @@ public interface RankingRepository extends JpaRepository<Ranking,Integer> {
     public Collection<Ranking> findAllByStoreOpenid(String storeOpenid);
 
     //user查询自己的排队进度
-//    @Query("select ranking from Ranking ranking where ranking.user.userOpenid = :userOpenid")
+    //    @Query("select ranking from Ranking ranking where ranking.user.userOpenid = :userOpenid")
     @Query(nativeQuery = true,value = "" +
             "SELECT c.rankingNum " +
             "from " +
@@ -28,7 +29,18 @@ public interface RankingRepository extends JpaRepository<Ranking,Integer> {
             "(Select (@rowNum \\:= 0) ) b " +
             "Order by ranking.rankingTime) c " +
             "where c.userOpenid = ?1 and c.storeOpenid= ?2 ;")
-    public Integer findByUserOpenid(String userOpenid,String storeOpenid);
+    public Integer findByUserOpenidAndStoreOpenid(String userOpenid, String storeOpenid);
+
+    //user查询自己的排队进度
+    @Query(nativeQuery = true,value = "" +
+            "SELECT c.rankingNum " +
+            "from " +
+            "(Select userOpenid,storeOpenid,rankingTime,(@rowNum \\:= @rowNum+1) as rankingNum " +
+            "From ranking, " +
+            "(Select (@rowNum \\:= 0) ) b " +
+            "Order by ranking.rankingTime) c " +
+            "where c.userOpenid = ?1 ;")
+    public Integer findByUserOpenid(String userOpenid);
 
     // 用户申请排队
     @Modifying
@@ -48,4 +60,7 @@ public interface RankingRepository extends JpaRepository<Ranking,Integer> {
             "Order by ranking.rankingTime) c " +
             "where  c.storeOpenid= ?1 AND rowNum = 1);")
     public Integer deleteByStore(String storeOpenid);
+
+
+
 }
