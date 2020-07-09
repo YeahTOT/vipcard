@@ -36,5 +36,16 @@ public interface RankingRepository extends JpaRepository<Ranking,Integer> {
     value = "INSERT INTO ranking (ranking.userOpenid, ranking.storeOpenid,ranking.rankingTime) VALUES (?1 , ?2 , ?3 )")
     public int addRanking(String userOpenid, String storeOpenid, String  date);
 
-    // 获取排队总人数
+    // 商家叫号
+    @Modifying
+    @Query(nativeQuery = true,
+    value = "DELETE FROM ranking WHERE ranking.rankingId = (" +
+            "SELECT id " +
+            "From" +
+            "(Select rankingId as id,userOpenid,storeOpenid,rankingTime,(@rowNum \\:= @rowNum+1) as rowNum " +
+            "From ranking," +
+            "(Select (@rowNum \\:= 0) ) b " +
+            "Order by ranking.rankingTime) c " +
+            "where  c.storeOpenid= ?1 AND rowNum = 1);")
+    public Integer deleteByStore(String storeOpenid);
 }

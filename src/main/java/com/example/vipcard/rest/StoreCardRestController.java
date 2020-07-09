@@ -37,7 +37,7 @@ public class StoreCardRestController {
         return new ResponseEntity<>(storeCards, HttpStatus.OK);
     }
 
-    // 根据openid查询商家会员卡信息
+    // storeCardID
     @RequestMapping(value="/cardByStoreCardID/{storeCardID}",method = RequestMethod.GET,produces="application/json")
     public ResponseEntity<StoreCard> findStoreCardByStoreCardID(@PathVariable int storeCardID){
         StoreCard storeCard;
@@ -54,9 +54,18 @@ public class StoreCardRestController {
         return new ResponseEntity<>(storeCard, HttpStatus.OK);
     }
 
-    // 商家出示该会员卡的二维码，用户扫码领取会员卡
+    /**
+     *
+     *
+     * @description: 商家出示该会员卡的二维码，用户扫码领取会员卡
+     * @param storeCardId:商家会员卡id
+     * @return:
+     * @author: JT
+     * @time: 2020/6/23 14:17
+     */
     @RequestMapping(value="/QRCode/{storeCardId}",method = RequestMethod.GET,produces="application/json")
     public ResponseEntity<byte[]> showQRCode(@PathVariable String storeCardId){
+        System.out.println(storeCardId);
         byte[] qrcode = null;
         try {
             qrcode = QRCode.getQRCodeImage(storeCardId, 360, 360);

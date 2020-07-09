@@ -7,9 +7,8 @@ java -jar vipcard-0.0.1-SNAPSHOT.jar
 
 
 # 进度
-查询user的排队进度时更具时间排序然后更具userOpenid查询该用户的序号
-增加用户会员卡和商家会员卡的api实现
-
+商家叫号
+登录，讲登录信息保存在session中
 
    {
     "cardName": "季季红",

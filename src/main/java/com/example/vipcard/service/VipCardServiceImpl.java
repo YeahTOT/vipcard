@@ -106,6 +106,11 @@ public class VipCardServiceImpl implements VipCardService {
     }
 
     @Override
+    public boolean delUserCard(int userCardId) {
+        return userCardRepository.deleteUserCardByUserCardId(userCardId) == 1;
+    }
+
+    @Override
     public UserCard getUserCardByUserCardId(int userCardId) {
         return userCardRepository.findUserCardByUserCardId(userCardId);
     }
@@ -155,6 +160,11 @@ public class VipCardServiceImpl implements VipCardService {
         SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String str = f.format(date);
         return rankingRepository.addRanking(userOpenid, storeOpenid,str)>0;
+    }
+
+    @Override
+    public Integer storeDelUserRanking(String storeOpenid) {
+        return rankingRepository.deleteByStore(storeOpenid);
     }
 
 

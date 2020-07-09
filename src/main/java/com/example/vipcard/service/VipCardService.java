@@ -39,6 +39,8 @@ public interface VipCardService {
     public Collection<UserCard> getUserCardByOpenid(String openid);
     // 增加用户的会员卡
     public UserCard addUserCard(UserCard userCard);
+    // 删除会员卡
+    public boolean delUserCard(int userCardId);
 
 
     // 根据userCardId查询某一张会员卡
@@ -62,4 +64,6 @@ public interface VipCardService {
     public int getRankingNumByStoreOpenid(String storeOpenid);
     // 用户申请排队
     public boolean userAddRanking(String userOpenid,String storeOpenid);
+    // 商家叫号 删除排名第一的人的ranking
+    public Integer storeDelUserRanking(String storeOpenid);
 }

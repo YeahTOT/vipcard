@@ -51,4 +51,20 @@ public class UserCardRestController {
         userCard = vipCardService.addUserCard(userCard);
         return new ResponseEntity<>(userCard, HttpStatus.OK);
     }
+
+    /**
+     *
+     *
+     * @description: 删除会员卡
+     * @param userCardId:会员卡id
+     * @return:
+     * @author: JT
+     * @time: 2020/6/23 15:48
+     *
+     */
+    @RequestMapping(value="/{userCardId}",method = RequestMethod.DELETE,produces="application/json")
+    public ResponseEntity<Boolean> delUserCard(@PathVariable int userCardId){
+        boolean key = vipCardService.delUserCard(userCardId);
+        return new ResponseEntity<>(key, HttpStatus.OK);
+    }
 }
