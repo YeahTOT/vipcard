@@ -90,6 +90,12 @@ public class RankingRestController {
         return new ResponseEntity<>(stores, HttpStatus.OK);
     }
 
-    // 商家取消排队
+    // 用户取消排队
+    @RequestMapping(value = "/rankingCancelByUser/{userOpenid}", method = RequestMethod.DELETE)
+    public ResponseEntity<Boolean> rankingCancelByUserOpenid(@PathVariable String userOpenid){
+        boolean key ;
+        key = vipCardService.cancelByUser(userOpenid);
+        return new ResponseEntity<>(key, HttpStatus.OK);
+    }
 
 }

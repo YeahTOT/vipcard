@@ -62,5 +62,8 @@ public interface RankingRepository extends JpaRepository<Ranking,Integer> {
     public Integer deleteByStore(String storeOpenid);
 
 
-
+    // 用户取消预约 从ranking 表中根据userOpenid删除该记录
+    @Modifying
+    @Query("delete from Ranking ranking where ranking.user.userOpenid = :userOpenid")
+    Integer cancel(String userOpenid);
 }

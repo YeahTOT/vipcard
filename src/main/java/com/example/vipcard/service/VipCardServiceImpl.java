@@ -171,8 +171,12 @@ public class VipCardServiceImpl implements VipCardService {
     @Override
     public Collection<Store> findStoreByUser(String userOpenid) {
         Store store = null;
-        Collection<Store> stores = storeRepository.findStoreOpenidByUser(userOpenid);
-        return stores;
+        return storeRepository.findStoreOpenidByUser(userOpenid);
+    }
+
+    @Override
+    public boolean cancelByUser(String userOpenid) {
+        return rankingRepository.cancel(userOpenid) == 1;
     }
 
 

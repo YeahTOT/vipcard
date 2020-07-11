@@ -67,7 +67,10 @@ public interface VipCardService {
     // 商家叫号 删除排名第一的人的ranking
     public Integer storeDelUserRanking(String storeOpenid);
 
+    // 用户查询自己的排队进度
     Integer getRankingByUserOpenid(String userOpenid);
-
+    // 用户查询自己正在预约的杀郭嘉
     Collection<Store> findStoreByUser(String userOpenid);
+    // 用户取消预约
+    boolean cancelByUser(String userOpenid);
 }
