@@ -1,5 +1,5 @@
 java -jar vipcard-0.0.1-SNAPSHOT.jar    
-7-15
+7-15提交
 # bug
 1. 需要完成会员卡等级规则，首充值金额和积分的实体类
 
