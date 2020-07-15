@@ -1,0 +1,8 @@
+<view class="cu-list grid col-{{gridCol}}">
+	<view class="cu-item" wx:for="{{iconList}}" wx:key='grid'>
+		<navigator url="../list/list?name={{item.name}}">
+			<image src="{{item.image}}" style="width:80rpx;height:80rpx"></image>
+			<text>{{item.name}}</text>
+		</navigator>
+	</view>
+</view>

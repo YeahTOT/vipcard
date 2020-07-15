@@ -1,8 +1,6 @@
 java -jar vipcard-0.0.1-SNAPSHOT.jar    
 
 # bug
-查询ranking排序没有用
-!. 需要完成预约排队的api以及前端功能
 1. 需要完成会员卡等级规则，首充值金额和积分的实体类
 
 
@@ -11,7 +9,9 @@ java -jar vipcard-0.0.1-SNAPSHOT.jar
 用户申请排队，查看排队的api实现
 用户取消预约实现
 ## 未完成
+增加手动充值，手动消费功能
 登录，讲登录信息保存在session中
+增加登录拦截器
 
    {
     "cardName": "季季红",

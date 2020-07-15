@@ -1,0 +1,39 @@
+/* pages/personal/vipCard/record/record.wxss */
+/* 日期选择 */
+.picker_group {
+  height: 85rpx;
+  line-height: 85rpx;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  font-size: 30rpx;
+  border-bottom: 1rpx solid #efefef;
+
+}
+
+.picker_group picker {
+  background-color: rgba(105, 222, 243, 0.974);
+  width:200rpx;
+  text-align: center;
+  color: #0097e8;
+  height: 55rpx;
+  line-height: 55rpx;
+  margin: 0 2%;
+  padding: 0 2%;
+  font-weight: 600;
+  border: 5rpx solid #64bff1;
+  border-radius: 30rpx;
+}
+
+/* 筛选 */
+.choice {
+  width: 70px;
+  margin: 0;
+  float: right
+}
+/* 消费类型以及金额 */
+.record{
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+}

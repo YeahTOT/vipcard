@@ -1,0 +1,26 @@
+<view class="bg-gradual-blue padding radius shadow-blur" style="margin:10px">
+	<!-- 左侧logo -->
+	<view class="vipCard">
+		<view class="cu-avatar round " style="background-image:url({{card.sCard.cardLogo}});"></view>
+	</view>
+	<!-- 中间的会员卡信息 -->
+	<view class="" style="padding:6px; display:inline-block">
+		<view>
+			<view>{{card.sCard.store.storeName}}</view>
+			<view>{{card.sCard.cardName}}</view>
+			<view wx:if="{{card.cardMoney}}">剩余金额： {{card.cardMoney}} 元</view>
+			<view wx:if="{{card.cardScore}}">剩余积分： {{card.cardScore}} 分</view>
+			<view wx:if="{{card.cardTimes}}">剩余次数： {{card.cardTimes}} 次</view>
+			<view>有效期： {{card.sCard.cardTimeStart}} ~~ {{card.sCard.cardTimeEnd}}</view>
+		</view>
+	</view>
+	<!-- 右侧会员卡标签 -->
+	<view class="rightTab">
+	<block wx:for="{{card.sCard.cardTypes}}" wx:key="cardTypeList">
+		<view class=" flex-wrap fr" style="margin:5px 5px">
+			<view class="cu-tag line-black">{{item.cardType}}</view>
+		</view>
+	</block>
+	</view>
+	
+</view>

@@ -1,0 +1,11 @@
+/* pages/personal/personal.wxss */
+
+
+.cardStatus {
+   display: inline-block;
+   margin: 5px;
+}
+
+.textLine {
+   text-decoration: underline;
+}

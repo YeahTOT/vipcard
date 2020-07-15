@@ -1,0 +1,40 @@
+<card card="{{card}}"></card>
+<!-- 会员卡的有效期以及说明 -->
+
+<!-- 功能 -->
+<view class="cu-list grid col-3">
+	<view class="cu-item" wx:for="{{iconList}}" wx:key='grid'>
+		<navigator url="{{item.url}}?cardID={{cardID}}">
+			<image src="{{item.image}}" style="width:80rpx;height:80rpx"></image>
+			<text>{{item.name}}</text>
+		</navigator>
+	</view>
+</view>
+<!-- 地址 -->
+<view class="bg-white" style="margin:20rpx">
+	<view class="padding" style="length:200rpx">
+		<image src="../../../images/car.png" style="width:60rpx;height:60rpx;margin-right:20rpx"></image>
+		<view style="display:inline-block;width:400rpx ;font-size:30rpx">{{card.sCard.store.storeAddress}}</view>
+	</view>
+</view>
+<!-- 联系电话 -->
+<view class="bg-white" style="margin:20rpx">
+	<view class="padding" style="length:200rpx">
+		<image src="../../../images/phone.png" style="width:60rpx;height:60rpx;margin-right:20rpx"></image>
+		<view style="display:inline-block;width:400rpx ;font-size:30rpx">{{card.sCard.store.storePhone}}</view>
+	</view>
+</view>
+<!-- <image src="../../../images/phone.png" style="width:60rpx;height:60rpx;float:right;margin-lift:10rpx"></image> -->
+<view class="bg-white" style="margin:20rpx">
+	<view>
+		<view style="float:left;">使用说明：</view>
+		<view style="display:inline-block;width:500rpx">{{card.sCard.cardNode}}</view>
+	</view>
+</view>
+<!-- 标签 -->
+
+<navigator class="cu-bar bg-white solid-bottom margin-top" url="./record/record" open-type="navigate">
+	<view class="action">
+		<text class="cuIcon-tagfill text-orange "></text> 删除会员卡
+	</view>
+</navigator>

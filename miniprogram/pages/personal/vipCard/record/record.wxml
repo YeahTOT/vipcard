@@ -1,0 +1,35 @@
+<!--pages/personal/vipCard/record/record.wxml-->
+<!-- 上方标题栏 时间段以及类型选择 -->
+<!-- 时间段选择 -->
+<view class="picker_group">
+	<picker style="margin-left:50rpx;" mode="date" value="{{date}}" end="{{date2}}" bindchange="bindDateChange">
+		<view class="picker">
+			{{dateStart}}
+		</view>
+	</picker>
+	至
+	<picker mode="date" value="{{date2}}" start="{{date}}" end="2050-01-01" bindchange="bindDateChange2">
+		<view class="picker">
+			{{dateEnd}}
+		</view>
+	</picker>
+	<!-- 筛选按钮 -->
+	<button class="cu-btn  sm " style="width:120rpx;background-color: rgba(105, 222, 243, 0.974);" bindtap="findRecord">筛选</button>
+</view>
+<!-- 消费记录列表 -->
+<block wx:for="{{cardRecord}}" wx:key="cardRecord" >
+	<view class="bg-white margin" >
+		<view class="record">
+			<view style="margin-left:30rpx">{{item.recordType}}</view>
+			<view style="margin-right:30rpx" wx:if="{{item.recordMoney!=0}}">{{item.recordMoney}}元</view>
+			<view style="margin-right:30rpx" wx:if="{{item.recordTimes!=0}}">{{item.recordTimes}}次</view>
+			<view style="margin-right:30rpx" wx:if="{{item.recordScore!=0}}">{{item.recordScore}}分</view>
+		</view>
+		<view class="record">
+			<view style="margin-top:10rpx;display:inline-block">{{item.recordTime}}</view>
+			<view style="display:inline-block;" wx:if="{{item.recordMoneySurplus!=0}}">剩余金额：{{item.recordMoneySurplus}}元</view>
+			<view style="display:inline-block;" wx:if="{{item.recordTimesSurplus!=0}}">剩余积分：{{item.recordTimesSurplus}}分</view>
+			<view style="display:inline-block;" wx:if="{{item.recordScoreSurplus!=0}}">剩余次数：{{item.recordScoreSurplus}}次</view>
+		</view>
+	</view>
+</block>

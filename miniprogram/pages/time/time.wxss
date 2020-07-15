@@ -1,0 +1,36 @@
+/**index.wxss**/
+.container {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+.container_content {
+  height: 100%;
+  width: 100%;
+  margin-top:40%;
+  text-align: center;
+}
+
+.content_time {
+  color: forestgreen;
+  font-size: 50rpx;
+}
+
+.btn_start {
+  width: 30%;
+  text-align: center;
+  background-color: green;
+}
+
+.btn_stop {
+  width: 30%;
+  text-align: center;
+  background-color: red;
+}
+
+.btn_restart {
+  width: 30%;
+  text-align: center;
+  background-color: darkcyan;
+}

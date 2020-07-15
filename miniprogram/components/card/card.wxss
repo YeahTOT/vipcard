@@ -1,0 +1,10 @@
+/* components/card/card.wxss */
+.vipCard {
+  float: left;
+}
+.rightTab{
+  /* display:inline-block; */
+  position: absolute;
+  top: 20rpx;
+  right: 20rpx;
+}

@@ -1,0 +1,4 @@
+
+<button  bindtap="start">开始</button>
+<button  bindtap="pause">停止</button>
+<view style="font-size: 50rpx;text-align: center;">{{time}}</view>

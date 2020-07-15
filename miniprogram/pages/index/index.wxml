@@ -1,0 +1,5 @@
+<view>
+	<input type="text" placeholder="name:" bindinput="inputName"></input>
+	<input type="text" placeholder="password:" bindinput="inputPassword"></input>
+  <button bindtap="submitButton">登录</button>
+</view>
