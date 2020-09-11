@@ -37,6 +37,13 @@ public class VipCardServiceImpl implements VipCardService {
     }
 
     @Override
+    public User getUserByUserCardId(int userCardId) {
+        // 查询会员卡
+        UserCard userCard = userCardRepository.findUserCardByUserCardId(userCardId);
+        return userRepository.findByUserOpenid(userCard.getUserOpenid());
+    }
+
+    @Override
     public Collection<StoreType> getAllStoreTypes() {
         return (Collection<StoreType>) storeTypeRepository.findAll();
     }
@@ -177,6 +184,11 @@ public class VipCardServiceImpl implements VipCardService {
     @Override
     public boolean cancelByUser(String userOpenid) {
         return rankingRepository.cancel(userOpenid) == 1;
+    }
+
+    @Override
+    public boolean delStoreCardById(int storeCardID) {
+        return storeCardRepository.deleteStoreCardByStoreCardId(storeCardID) == 1;
     }
 
 

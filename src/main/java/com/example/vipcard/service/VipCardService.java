@@ -8,6 +8,8 @@ import java.util.Date;
 public interface VipCardService {
     // 获取所有的用户
     public Collection<User> getAllUsers();
+    // 根据userCardId查询用户信息
+    public User getUserByUserCardId(int userCardId);
 
     // 获取所有的商家类型
     public Collection<StoreType> getAllStoreTypes();
@@ -73,4 +75,6 @@ public interface VipCardService {
     Collection<Store> findStoreByUser(String userOpenid);
     // 用户取消预约
     boolean cancelByUser(String userOpenid);
+    // 商家根据会员卡id删除会员卡
+    boolean delStoreCardById(int storeCardID);
 }

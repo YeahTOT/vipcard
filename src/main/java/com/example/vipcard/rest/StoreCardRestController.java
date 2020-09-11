@@ -4,6 +4,7 @@ import com.example.vipcard.model.StoreCard;
 import com.example.vipcard.service.VipCardService;
 import com.example.vipcard.tool.QRCode;
 import com.google.zxing.WriterException;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -81,4 +82,14 @@ public class StoreCardRestController {
         headers.setContentType(MediaType.IMAGE_PNG);
         return new ResponseEntity<byte[]> (qrcode, headers, HttpStatus.CREATED);
     }
+
+  // TODO: 商家删除会员卡
+    // 商家根据会员卡id删除会员卡
+  @RequestMapping(value="/cardByStoreCardID/{storeCardID}",method = RequestMethod.DELETE,produces="application/json")
+  public ResponseEntity<Boolean> delStoreCardByStoreCardID(@PathVariable int storeCardID){
+      boolean key;
+      key = vipCardService.delStoreCardById(storeCardID);
+      return new ResponseEntity<>(key, HttpStatus.OK);
+  }
+
 }

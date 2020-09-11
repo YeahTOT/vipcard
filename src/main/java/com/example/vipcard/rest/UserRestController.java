@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,5 +25,12 @@ public class UserRestController {
         Collection<User> users;
         users = vipCardService.getAllUsers();
         return new ResponseEntity<>(users, HttpStatus.OK);
+    }
+
+    // 根据userCardId查询
+    @RequestMapping(value="/{userCardId}",method = RequestMethod.GET,produces="application/json")
+    public ResponseEntity<User> findUserByUserCardId(@PathVariable int userCardId){
+        User user = vipCardService.getUserByUserCardId(userCardId);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 }
